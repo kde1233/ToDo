@@ -1,18 +1,54 @@
-[project]
-name = "todo"
-version = "0.1.0"
-description = ""
-authors = [
-    {name = "kim dong eun",email = "kda7393@gmail.com"}
-]
-readme = "README.md"
-requires-python = ">=3.12"
-dependencies = [
-    "fastapi (>=0.115.12,<0.116.0)",
-    "uvicorn[standard] (>=0.34.0,<0.35.0)"
+# ---------------------------------------------------------
+# [프로젝트 설정 정보]
+# 이 파일은 Poetry에서 사용하는 설정 파일이다.
+# 프로젝트 이름, 설명, 포함할 폴더, 필요한 패키지 등을 여기에 적는다.
+# ---------------------------------------------------------
+[tool.poetry]
+
+name = "todo"           # * 프로젝트 이름 (폴더명과는 무관함)
+version = "0.1.0"       # * 프로젝트 버전 (업데이트할 때 변경)
+description = ""        # * 프로젝트에 대한 간단한 설명 
+authors = ["dong eun <kda7393@gmail.com>"]  # * 만든 사람의 이름과 이메일 
+readme = "README.md"    # * 프로젝트 소개 문서의 파일 이름 
+
+# * 파이썬 코드가 들어 있는 폴더를 지정
+# - 일반적으로 우리가 만든 Python 파일이 모여 있는 폴더명을 적는다 
+packages = [
+    {include = "api"}   # * 'api' 폴더 안의 파일들을 패키지로 포함시킴
 ]
 
+# ---------------------------------------------------------
+# [의존성 목록: 이 프로젝트에서 필요한 패키지들]
+# - 아래에 나열된 모든 패키지는 프로젝트 실행에 꼭 필요함
+# ---------------------------------------------------------
+[tool.poetry.dependencies]
 
+python = "^3.12"        # * 사용 가능한 파이썬 버전 (3.12 이상이면 모두 허용)
+
+# * FastAPI: 웹 API 서버를 빠르게 만들 수 있게 해주는 프레임워크 
+fastapi = "^0.115.12"
+
+# * Uvicorn: FastAPI 앱을 실행하는 웹 서버 프로그램
+# - extras 옵션에 "standard"를 넣으면 보안, 재시작 등의 기능도 함께 설치됨 
+uvicorn = {extras = ["standard"], version = "^0.34.0"}
+
+# * SQLAlchemy: ORM(Object Relational Mapping) 기능을 제공 
+# - 파이썬 코드로 테이블을 만들고 다룰 수 있게 해줌 (SQL 없이도 가능)
+sqlalchemy = "^2.0.40"
+
+# * asyncpg: PostgreSQL과 비동기로 연결할 수 있게 해주는 드라이버 
+# - FastAPI에서 데이터베이스를 빠르게 사용하기 위해 필요함
+asyncpg = "^0.30.0"
+
+# --------------------------------------------------------------
+# [빌드 설정: 프로젝트를 포장하거나 배포할 때 사용하는 도구 설정]
+# --------------------------------------------------------------
+psycopg2-binary = "^2.9.10"
 [build-system]
-requires = ["poetry-core>=2.0.0,<3.0.0"]
+
+# * 빌드를 실행할 때 필요한 도구 이름 
+requires = ["poetry-core"]
+
+# * 빌드를 실제로 처리해주는 프로그램 이름 (Poetry 내부에서 사용)
 build-backend = "poetry.core.masonry.api"
+
