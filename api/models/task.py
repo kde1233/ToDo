@@ -31,12 +31,12 @@ class Task(Base):
     # * SQLAlchemy: Integer + primary_key=True
     # * PostgreSQL: SERIAL PRIMARY KEY (자동 증가 정수, 기본키)
     
-title = Column(String(1024))
+    title = Column(String(1024))
     # DB : tasks.title
     # * SQLAlchemy: String(1024)
     # * PostgreSQL: VARCHAR(1024)
     
-done = relationship("Done", back_populates="task", cascade="all, delete")
+    done = relationship("Done", back_populates="task", cascade="all, delete")
     # * Task → Done: 1:1 ||
     # * done: 연결된 Done 객체 (완료 여부)를 참조함
     # * cascade="all, delete" → Task 삭제 시 연결된 Done도 함께 삭제됨
