@@ -24,6 +24,9 @@ app = FastAPI()
 
 # 기능 설명: task 기능들을 앱에 연결한다
 # 예: /tasks 주소에서 할 일 목록을 보여주거나 추가하는 기능
+@app.get("/")
+async def read_root():
+    return {"message": "Welcome to the ToDo API!"}
 app.include_router(task.router)
 
 # 기능 설명: done 기능들을 앱에 연결한다
